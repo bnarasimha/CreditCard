@@ -7,14 +7,14 @@ namespace HDFCCreditCard
         private CreditCardTransaction _creditCardTransaction;
         private int _couponAmount = 0;
         private CouponGenerator? couponGenerator;
-        private ICreditCard creditCard;
+        private ICreditCard _creditCard;
         #endregion
 
         #region Methods
         public MilleniaCreditCardBenefit(){
             _transactionServiceProvider = new TransactionServiceProvider();
             _creditCardTransaction = _transactionServiceProvider.getLatestTransaction();
-            creditCard = new MilleniaCreditCard();        
+            _creditCard = new MilleniaCreditCard();        
         }
 
         public void calculateBenefit()
@@ -30,7 +30,7 @@ namespace HDFCCreditCard
             couponGenerator = new CouponGenerator(_couponAmount);
             string couponCode = couponGenerator.getCouponCode();
             if(_couponAmount > 0){
-                Console.WriteLine("Hi, " + _creditCardTransaction.customer.Name + ". You have spent " + _creditCardTransaction.transactionAmount + " on " + creditCard.Name + " Credit Card. So as a reward, here is your coupon code: " + couponCode);
+                Console.WriteLine("Hi, " + _creditCardTransaction.customer.Name + ". You have spent " + _creditCardTransaction.transactionAmount + " on " + _creditCard.Name + " Credit Card. So as a reward, here is your coupon code: " + couponCode);
             }
             else{
                 Console.WriteLine("Hi, " + _creditCardTransaction.customer.Name + ". Thank you for using Millenia Credit Card.");
